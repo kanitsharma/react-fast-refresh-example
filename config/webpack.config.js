@@ -386,6 +386,7 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
+                  isEnvDevelopment && require.resolve('react-refresh/babel')
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -655,7 +656,9 @@ module.exports = function(webpackEnv) {
           formatter: isEnvProduction ? typescriptFormatter : undefined,
         }),
 
-      isEnvDevelopment && new ReactRefreshWebpackPlugin(),
+      isEnvDevelopment && new ReactRefreshWebpackPlugin({
+        disableRefreshCheck: true
+      }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
